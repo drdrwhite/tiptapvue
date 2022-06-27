@@ -1,8 +1,12 @@
 <template>
     <div>
         <h1>Tiptap Minimal Demo</h1>
-
         <editor-content :editor="editor" />
+        <div>
+            <div>Websocket URL: {{ provider.webSocket.url}}</div>
+            <div>Backend connection status: {{provider.status.toUpperCase()}}</div>
+            <div>Connection to backend is synchronised: {{provider.isSynced}}</div>
+        </div>
     </div>
 </template>
 
@@ -21,11 +25,12 @@ export default {
     data() {
         return {
             editor: null,
+            provider: null
         }
     },
 
     mounted() {
-        const provider = new HocuspocusProvider({
+        this.provider = new HocuspocusProvider({
             url: 'ws://127.0.0.1:8080',
             name: 'tiptapdemo-example-doc',
             token: 'notreallyatoken'
@@ -36,13 +41,14 @@ export default {
                     history: false  // collab ext will do history
                 }),
                 Collaboration.configure({
-                    document: provider.document,
+                    document: this.provider.document,
                 }),
                 Placeholder.configure({
                     placeholder: 'Write something …',
                 }),
             ],
         })
+        console.dir(this.provider.webSocket)
     },
 
     beforeDestroy() {
