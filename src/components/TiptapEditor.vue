@@ -1,58 +1,36 @@
 <template>
     <div>
-        <h1>Tiptap Minimal Demo</h1>
+        <h1>Tiptap Heading with Dynamic Tag Minimal Demo</h1>
+        <p>Use Alt-Command-1/2/3 to cycle through headings and watch the text disappear</p>
         <editor-content :editor="editor" />
-        <div>
-            <div>Websocket URL: {{ provider.webSocket.url}}</div>
-            <div>Backend connection status: {{provider.status.toUpperCase()}}</div>
-            <div>Connection to backend is synchronised: {{provider.isSynced}}</div>
-        </div>
     </div>
 </template>
 
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-2'
-import StarterKit from '@tiptap/starter-kit'
-import Collaboration from '@tiptap/extension-collaboration'
-import { HocuspocusProvider } from '@hocuspocus/provider'
-import Placeholder from '@tiptap/extension-placeholder'
-
+import {Heading} from '@/extensions/heading.js'
+import {Document} from '@tiptap/extension-document'
+import {Paragraph} from '@tiptap/extension-paragraph'
+import {Text} from '@tiptap/extension-text'
 export default {
     components: {
         EditorContent,
     },
-
     data() {
         return {
             editor: null,
             provider: null
         }
     },
-
     mounted() {
-        this.provider = new HocuspocusProvider({
-            url: 'ws://127.0.0.1:8080',
-            name: 'tiptapdemo-example-doc',
-            token: 'notreallyatoken'
-        })
         this.editor = new Editor({
             extensions: [
-                StarterKit.configure({
-                    history: false  // collab ext will do history
-                }),
-                Collaboration.configure({
-                    document: this.provider.document,
-                }),
-                Placeholder.configure({
-                    placeholder: 'Write something …',
-                }),
+                Document,
+                Heading,
+                Paragraph,
+                Text
             ],
         })
-        console.dir(this.provider.webSocket)
-    },
-
-    beforeDestroy() {
-        this.editor.destroy()
     },
 }
 </script>
@@ -61,13 +39,5 @@ export default {
 .ProseMirror {
     border: solid black 2px;
     padding: 1rem;
-}
-
-.ProseMirror p.is-editor-empty:first-child::before {
-    content: attr(data-placeholder);
-    float: left;
-    color: #adb5bd;
-    pointer-events: none;
-    height: 0;
 }
 </style>
