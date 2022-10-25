@@ -24,7 +24,9 @@ export default {
         this.editor = new Editor({
             extensions: [
                 Heading,
-                StarterKit
+                StarterKit.configure({
+                    heading: false
+                })
             ],
         })
     },
