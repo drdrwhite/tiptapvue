@@ -9,26 +9,22 @@
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-2'
 import {Heading} from '@/extensions/heading.js'
-import {Document} from '@tiptap/extension-document'
-import {Paragraph} from '@tiptap/extension-paragraph'
-import {Text} from '@tiptap/extension-text'
+import StarterKit from '@tiptap/starter-kit'
+
 export default {
     components: {
         EditorContent,
     },
     data() {
         return {
-            editor: null,
-            provider: null
+            editor: null
         }
     },
     mounted() {
         this.editor = new Editor({
             extensions: [
-                Document,
                 Heading,
-                Paragraph,
-                Text
+                StarterKit
             ],
         })
     },
