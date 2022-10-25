@@ -1,20 +1,12 @@
-# tiptapdemo
+# TipTap Vue.js Node View Dynamic Tag Problem Example
 
-A minimal example of TipTap configured for collaborative editing, to be used for testing backend.
+25/10/2022
 
-Assumes Node v16 LTS.
+This repo is a minimal example of TipTap that illustrates a problem with Vue.js node views.
 
-Will attempt to connect via websocket to url: 'ws://127.0.0.1:8080'. You'll need HocusPocus running.
-
-It will always open and modify the same document, called "tiptapdemo-example-doc"
-
-Details below are correct.
-
-## First start the Backend
-
-You can instantiate the backend by running from the `server` directory of the MVP repo. 
-
-Run the backend first so it claims port 8080, then run this client so that it'll grab 8081 etc.
+Run the example locally (see below) and then type some text in the editor. Change the paragraph to a heading, then
+toggle the heading level using Command-Alt-1, 2, 3 to change the heading level. Whilst the underlying json in the
+document content correctly contains the text, it does not render correctly in the DOM.
 
 ## Project setup
 ```
